@@ -22,7 +22,7 @@ try:
 except KeyError as e:
     raise KeyError(f"Store name not found for NWB adapter plugin: {str(e)}\nExpecting: dj.config['plugin_params'][pkg_name]['store_name']")
 
-exported_nwb_dir = dj.config['stores'][store_name]['stage']
+exported_nwb_dir = config['stores'][store_name]['stage']
 
 nwb_session_dir = pathlib.Path(exported_nwb_dir, 'session')
 nwb_mp_dir = pathlib.Path(exported_nwb_dir, 'membrane_potential')
