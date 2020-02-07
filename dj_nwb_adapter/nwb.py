@@ -3,12 +3,15 @@ import pynwb
 from pynwb import NWBHDF5IO
 import warnings
 import os
-from datajoint.attribute_adapter import AttributeAdapter
 from datajoint.settings import config
+from datajoint.attribute_adapter import AttributeAdapter
 from .meta import pkg_name
 
 warnings.filterwarnings('ignore')
 os.environ['DJ_SUPPORT_FILEPATH_MANAGEMENT'] = "TRUE"
+
+print(__file__)
+print(config)
 
 # This NWB Adapter plugin makes use of the `filepath` feature in DataJoint
 # Thus requiring the end-user to setup a store as part of their `dj.config['stores']`
@@ -119,7 +122,7 @@ def _write_nwb(save_fp, nwb2write, manager=None):
 
 # ==== instantiate dj.AttributeAdapter objects ====
 
-nwb_file = NWBFile()
-nwb_device = Device()
-nwb_patch_clamp_series = PatchClampSeries()
-nwb_ic_electrode = IntracellularElectrode()
+nwbfile = NWBFile()
+device = Device()
+patch_clamp_series = PatchClampSeries()
+ic_electrode = IntracellularElectrode()
