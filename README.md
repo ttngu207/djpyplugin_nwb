@@ -38,6 +38,7 @@ Install this plugin:
 Import datajoint and use these nwb type in table definition, e.g.:
 
 ```python
+import datajoint as dj
 schema = dj.schema('test')
 
 @schema
