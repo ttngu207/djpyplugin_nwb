@@ -4,7 +4,7 @@ import pathlib
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-with open(pathlib.Path(__file__).parent / 'dj_nwb_adapter' / 'meta.py') as f:
+with open(pathlib.Path(__file__).parent / 'djpyplugin_nwb' / 'meta.py') as f:
     exec(f.read())
 
 setuptools.setup(

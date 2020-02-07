@@ -17,10 +17,10 @@ The NWB types make use of DataJoint feature `filepath`, thus users are required 
 #### An example config:
 ```json
 "plugin": {
-    "attribute_adapter": ["dj_nwb_adapter"]
+    "attribute_adapter": ["djpyplugin_nwb"]
 },
 "plugin_kwargs": {
-    "dj_nwb_adapter": {"store_name": "nwb_store"}
+    "djpyplugin_nwb": {"store_name": "nwb_store"}
 },
 "stores": {
     "nwb_store": {
@@ -45,7 +45,7 @@ class Session(dj.Manual):
     definition = """
     session_id: int
     ---
-    nwb_file: <dj_nwb_adapter.nwb.nwbfile>
+    nwb_file: <djpyplugin_nwb.nwb.nwbfile>
     """
     
 @schema
@@ -53,7 +53,7 @@ class MembranePotential(dj.Manual):
     definition = """
     -> Session
     ---
-    patch_clamp_series: <dj_nwb_adapter.nwb.patch_clamp_series>
+    patch_clamp_series: <djpyplugin_nwb.nwb.patch_clamp_series>
     """
 ```
 
