@@ -3,7 +3,7 @@ import pynwb
 from pynwb import NWBHDF5IO
 import warnings
 import os
-from datajoint.settings import config
+from datajoint.settings import config as _config
 from datajoint.attribute_adapter import AttributeAdapter
 from .meta import pkg_name
 
@@ -17,17 +17,17 @@ os.environ['DJ_SUPPORT_FILEPATH_MANAGEMENT'] = "TRUE"
 # where "pkg_name" is the name of this plugin package upon installation
 
 try:
-    store_name = config['plugin_kwargs'][pkg_name]['store_name']
+    _store_name = _config['plugin_kwargs'][pkg_name]['store_name']
 except KeyError as e:
     raise KeyError(f"Store name not found for NWB adapter plugin: {str(e)}. Expecting: dj.config['plugin_kwargs'][pkg_name]['store_name']")
 
-exported_nwb_dir = config['stores'][store_name]['stage']
+_exported_nwb_dir = _config['stores'][_store_name]['stage']
 
-nwb_session_dir = pathlib.Path(exported_nwb_dir, 'session')
-nwb_mp_dir = pathlib.Path(exported_nwb_dir, 'membrane_potential')
+_nwb_session_dir = pathlib.Path(_exported_nwb_dir, 'session')
+_nwb_mp_dir = pathlib.Path(_exported_nwb_dir, 'membrane_potential')
 
-nwb_session_dir.mkdir(parents=True, exist_ok=True)
-nwb_mp_dir.mkdir(parents=True, exist_ok=True)
+_nwb_session_dir.mkdir(parents=True, exist_ok=True)
+_nwb_mp_dir.mkdir(parents=True, exist_ok=True)
 
 
 class _NWBFile(AttributeAdapter):
@@ -36,7 +36,7 @@ class _NWBFile(AttributeAdapter):
 
     def put(self, nwb):
         save_file_name = ''.join([nwb.identifier, '.nwb'])
-        save_fp = nwb_session_dir / save_file_name
+        save_fp = _nwb_session_dir / save_file_name
 
         print(f'Write NWBFile: {save_file_name}')
         _write_nwb(save_fp, nwb)
@@ -90,7 +90,7 @@ class _PatchClampSeries(AttributeAdapter):
         nwb.add_acquisition(patch_clamp)
 
         save_file_name = ''.join([nwb.identifier + '_{}'.format(patch_clamp.name), '.nwb'])
-        save_fp = nwb_mp_dir / save_file_name
+        save_fp = _nwb_mp_dir / save_file_name
 
         print(f'Write PatchClampSeries: {save_file_name}')
         _write_nwb(save_fp, nwb, manager=nwb.io.manager)
