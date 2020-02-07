@@ -120,6 +120,6 @@ def _write_nwb(save_fp, nwb2write, manager=None):
 # ==== instantiate dj.AttributeAdapter objects ====
 
 nwb_file = NWBFile()
-device = Device()
-patch_clamp_series = PatchClampSeries()
-ic_electrode = IntracellularElectrode()
+nwb_device = Device()
+nwb_patch_clamp_series = PatchClampSeries()
+nwb_ic_electrode = IntracellularElectrode()
