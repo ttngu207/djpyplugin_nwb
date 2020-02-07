@@ -16,7 +16,8 @@ os.environ['DJ_SUPPORT_FILEPATH_MANAGEMENT'] = "TRUE"
 # where "pkg_name" is the name of this plugin package upon installation
 
 try:
-    store_name = dj.config.get('plugin_params').get(pkg_name).get('store_name')
+    # store_name = dj.config.get('plugin_params').get(pkg_name).get('store_name')
+    store_name = 'nwb_store'
 except KeyError as e:
     raise KeyError(f"Store name not found for NWB adapter plugin: {str(e)}\nExpecting: dj.config['plugin_params'][pkg_name]['store_name']")
 
