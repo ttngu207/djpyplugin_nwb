@@ -10,9 +10,6 @@ from .meta import pkg_name
 warnings.filterwarnings('ignore')
 os.environ['DJ_SUPPORT_FILEPATH_MANAGEMENT'] = "TRUE"
 
-print(__file__)
-print(config)
-
 # This NWB Adapter plugin makes use of the `filepath` feature in DataJoint
 # Thus requiring the end-user to setup a store as part of their `dj.config['stores']`
 # And also to specify to this plugin the store name to be used, in:
@@ -20,7 +17,7 @@ print(config)
 # where "pkg_name" is the name of this plugin package upon installation
 
 try:
-    store_name = config.get('plugin_params').get(pkg_name).get('store_name')
+    store_name = config['plugin_params'][pkg_name]['store_name']
 except KeyError as e:
     raise KeyError(f"Store name not found for NWB adapter plugin: {str(e)}\nExpecting: dj.config['plugin_params'][pkg_name]['store_name']")
 
