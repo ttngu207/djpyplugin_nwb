@@ -1,9 +1,10 @@
-import datajoint as dj
 import pathlib
 import pynwb
 from pynwb import NWBHDF5IO
 import warnings
 import os
+from datajoint.attribute_adapter import AttributeAdapter
+from datajoint.settings import config
 from .meta import pkg_name
 
 warnings.filterwarnings('ignore')
@@ -30,7 +31,7 @@ nwb_session_dir.mkdir(parents=True, exist_ok=True)
 nwb_mp_dir.mkdir(parents=True, exist_ok=True)
 
 
-class NWBFile(dj.AttributeAdapter):
+class NWBFile(AttributeAdapter):
     """ Adapter for: pynwb.file.NWBFile"""
     attribute_type = 'filepath@nwb_store'
 
@@ -49,7 +50,7 @@ class NWBFile(dj.AttributeAdapter):
         return nwb
 
 
-class Device(dj.AttributeAdapter):
+class Device(AttributeAdapter):
     """ Adapter for: pynwb.device.Device"""
     attribute_type = 'longblob'
 
@@ -60,7 +61,7 @@ class Device(dj.AttributeAdapter):
         return pynwb.device.Device(name=device_dict['name'])
 
 
-class IntracellularElectrode(dj.AttributeAdapter):
+class IntracellularElectrode(AttributeAdapter):
     """ Adapter for: pynwb.icephys.IntracellularElectrode"""
     attribute_type = 'longblob'
 
@@ -78,7 +79,7 @@ class IntracellularElectrode(dj.AttributeAdapter):
             location=ic_electrode_dict['location'])
 
 
-class PatchClampSeries(dj.AttributeAdapter):
+class PatchClampSeries(AttributeAdapter):
     """ Adapter for: pynwb.icephys.PatchClampSeries"""
     attribute_type = 'filepath@nwb_store'
 
