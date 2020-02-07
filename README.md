@@ -1,12 +1,12 @@
 # djpyplugin_nwb
 NWB attribute adapter plugin for DataJoint
 
-## This plugin defines 4 data types:
+## This plugin defines 4 data types under the `nwb` namespace:
 
-+ ***nwbfile*** - type `filepath@store` - models `pynwb.file.NWBFile`
-+ ***device*** - type `longblob` - models `pynwb.device.Device`
-+ ***ic_electrode*** - type `longblob` - models `pynwb.icephys.IntracellularElectrode`
-+ ***patch_clamp_series*** - type `filepath@store` - models `pynwb.icephys.PatchClampSeries`
++ ***nwb.nwbfile*** - type `filepath@store` - models `pynwb.file.NWBFile`
++ ***nwb.device*** - type `longblob` - models `pynwb.device.Device`
++ ***nwb.ic_electrode*** - type `longblob` - models `pynwb.icephys.IntracellularElectrode`
++ ***nwb.patch_clamp_series*** - type `filepath@store` - models `pynwb.icephys.PatchClampSeries`
 
 ## Setup
 The NWB types make use of DataJoint feature `filepath`, thus users are required to
