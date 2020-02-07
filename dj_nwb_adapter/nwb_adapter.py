@@ -4,7 +4,7 @@ import pynwb
 from pynwb import NWBHDF5IO
 import warnings
 import os
-from . import pkg_name
+from .meta import pkg_name
 
 warnings.filterwarnings('ignore')
 os.environ['DJ_SUPPORT_FILEPATH_MANAGEMENT'] = "TRUE"
