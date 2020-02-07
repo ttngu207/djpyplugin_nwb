@@ -17,9 +17,9 @@ os.environ['DJ_SUPPORT_FILEPATH_MANAGEMENT'] = "TRUE"
 # where "pkg_name" is the name of this plugin package upon installation
 
 try:
-    store_name = config['plugin_params'][pkg_name]['store_name']
+    store_name = config['plugin_kwargs'][pkg_name]['store_name']
 except KeyError as e:
-    raise KeyError(f"Store name not found for NWB adapter plugin: {str(e)}\nExpecting: dj.config['plugin_params'][pkg_name]['store_name']")
+    raise KeyError(f"Store name not found for NWB adapter plugin: {str(e)}. Expecting: dj.config['plugin_kwargs'][pkg_name]['store_name']")
 
 exported_nwb_dir = config['stores'][store_name]['stage']
 
@@ -30,7 +30,7 @@ nwb_session_dir.mkdir(parents=True, exist_ok=True)
 nwb_mp_dir.mkdir(parents=True, exist_ok=True)
 
 
-class NWBFile(AttributeAdapter):
+class _NWBFile(AttributeAdapter):
     """ Adapter for: pynwb.file.NWBFile"""
     attribute_type = 'filepath@nwb_store'
 
@@ -49,7 +49,7 @@ class NWBFile(AttributeAdapter):
         return nwb
 
 
-class Device(AttributeAdapter):
+class _Device(AttributeAdapter):
     """ Adapter for: pynwb.device.Device"""
     attribute_type = 'longblob'
 
@@ -60,7 +60,7 @@ class Device(AttributeAdapter):
         return pynwb.device.Device(name=device_dict['name'])
 
 
-class IntracellularElectrode(AttributeAdapter):
+class _IntracellularElectrode(AttributeAdapter):
     """ Adapter for: pynwb.icephys.IntracellularElectrode"""
     attribute_type = 'longblob'
 
@@ -78,7 +78,7 @@ class IntracellularElectrode(AttributeAdapter):
             location=ic_electrode_dict['location'])
 
 
-class PatchClampSeries(AttributeAdapter):
+class _PatchClampSeries(AttributeAdapter):
     """ Adapter for: pynwb.icephys.PatchClampSeries"""
     attribute_type = 'filepath@nwb_store'
 
@@ -119,7 +119,7 @@ def _write_nwb(save_fp, nwb2write, manager=None):
 
 # ==== instantiate dj.AttributeAdapter objects ====
 
-nwbfile = NWBFile()
-device = Device()
-patch_clamp_series = PatchClampSeries()
-ic_electrode = IntracellularElectrode()
+nwbfile = _NWBFile()
+device = _Device()
+patch_clamp_series = _PatchClampSeries()
+ic_electrode = _IntracellularElectrode()
