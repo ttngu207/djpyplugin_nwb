@@ -1,1 +1,1 @@
-from .meta import *
+from . import nwb
