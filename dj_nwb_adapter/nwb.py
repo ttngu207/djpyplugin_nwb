@@ -5,7 +5,7 @@ import warnings
 import os
 from datajoint.settings import config as _config
 from datajoint.attribute_adapter import AttributeAdapter
-from .meta import pkg_name
+from .meta import pkg_name as _pkg_name
 
 warnings.filterwarnings('ignore')
 os.environ['DJ_SUPPORT_FILEPATH_MANAGEMENT'] = "TRUE"
@@ -17,7 +17,7 @@ os.environ['DJ_SUPPORT_FILEPATH_MANAGEMENT'] = "TRUE"
 # where "pkg_name" is the name of this plugin package upon installation
 
 try:
-    _store_name = _config['plugin_kwargs'][pkg_name]['store_name']
+    _store_name = _config['plugin_kwargs'][_pkg_name]['store_name']
 except KeyError as e:
     raise KeyError(f"Store name not found for NWB adapter plugin: {str(e)}. Expecting: dj.config['plugin_kwargs'][pkg_name]['store_name']")
 
