@@ -60,7 +60,7 @@ class MembranePotential(dj.Manual):
 Note: make sure to set the environment variable `DJ_SUPPORT_ADAPTED_TYPES` to `True` 
 
 ## Known Issues
-1. Silently failed when using `dj.create_virtual_module()` without enabling `DJ_SUPPORT_ADAPTED_TYPES`
+1. Silently fails when using `dj.create_virtual_module()` without enabling `DJ_SUPPORT_ADAPTED_TYPES`
 ```python
 import datajoint as dj
 schema = dj.create_virtual_module('schema', 'test')
